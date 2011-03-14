@@ -48,8 +48,8 @@ class Child < CouchRestRails::Document
   end
   
   def validate_audio_file_name
-    return true if @audio_file_name == nil || /([^\s]+(\.(?i)(amr|mp3))$)/ =~ @audio_file_name
-    [false, "Please upload a valid audio file (amr or mp3) for this child record"]
+    return true if @audio_file_name == nil || /([^\s]+(\.(?i)(ogg|amr|mp3))$)/ =~ @audio_file_name
+    [false, "Please upload a valid audio file (ogg or amr or mp3) for this child record"]
   end
   
   def method_missing(m, *args, &block)  
@@ -210,6 +210,5 @@ class Child < CouchRestRails::Document
     create_attachment :name => attachment.name,
                       :content_type => attachment.content_type,
                       :file => attachment.data
-
   end
 end
