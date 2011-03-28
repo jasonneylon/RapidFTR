@@ -179,6 +179,13 @@ class Child < CouchRestRails::Document
     self['last_updated_by'].blank? || user_names_after_deletion.blank?
   end
 
+  def attach(attachment, key)
+    self[key] = attachment.name
+    create_attachment :name => attachment.name,
+                      :content_type => attachment.content_type,
+                      :file => attachment.data
+  end  
+
   protected
 
   def current_formatted_time
@@ -204,11 +211,4 @@ class Child < CouchRestRails::Document
     self[field_name].strip != @from_child[field_name].strip
   end
 
-  private
-  def attach(attachment, key)
-    self[key] = attachment.name
-    create_attachment :name => attachment.name,
-                      :content_type => attachment.content_type,
-                      :file => attachment.data
-  end
 end
