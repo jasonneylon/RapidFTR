@@ -7,13 +7,12 @@ namespace :audio do
 
       amr_file_path = File.join(Dir.tmpdir, "rapidftr.amr")
       mp3_file_path = File.join(Dir.tmpdir, "rapidftr.mp3")
-      
       File.open(amr_file_path, 'w') {|amr_file| amr_file.write(data.read)}
     
       convert amr_file_path, mp3_file_path
       
       mp3_attachment = create_mp3_attachment(mp3_file_path)
-      child.attach(mp3_attachment, 'recorded_audio_mp3')
+      child.attach mp3_attachment, 'recorded_audio_mp3'
       child.save!      
     end
     
@@ -21,6 +20,7 @@ namespace :audio do
 end
 
 def convert(amr_file_path, mp3_file_path)
+  puts "Converting #{amr_file_path} #{mp3_file_path}"
   %x[ ffmpeg -y -i #{amr_file_path} #{mp3_file_path} ]
 end
 

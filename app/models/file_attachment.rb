@@ -16,7 +16,6 @@ class FileAttachment
     new attachment_file_name, content_type, file.read
   end
 
-
   def FileAttachment.generate_name(prefix = "file")
     "#{prefix}-#{Time.now.strftime('%Y-%m-%dT%H%M%S')}"    
   end
